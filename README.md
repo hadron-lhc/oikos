@@ -12,7 +12,7 @@ Design your house floor plan and get an instant price prediction using Machine L
 
 |                     |                                                                                                                |
 | ------------------- | -------------------------------------------------------------------------------------------------------------- |
-| 🌐 Web App          | [oikos-hvpr.onrender.com](https://oikos-hvpr.onrender.com/)                                                    |
+| 🌐 Web App          | [oikos.valentingonzalezdaumes.workers.dev](https://oikos.valentingonzalezdaumes.workers.dev/)                  |
 | 📊 Market Dashboard | [Looker Studio](https://lookerstudio.google.com/u/0/reporting/aac5fa4f-ba3a-443a-85f6-aade78be0318/page/78DsF) |
 | 🔍 Data Exploration | [Streamlit](https://oikos-data-exploration.streamlit.app/)                                                     |
 
@@ -49,9 +49,11 @@ Data was collected using a custom scraper from Mercado Libre Inmuebles, covering
 
 ![additional](./images/additional-information.png)
 
-1. **Get the price** — click "Calcular valor"
+1. **Get the price** — click "Calculate Value"
 
 ![show-price](./images/show_results.png)
+
+The production site runs inference directly in the browser, so the prediction does not depend on a Python server.
 
 ---
 
@@ -79,10 +81,10 @@ Data was collected using a custom scraper from Mercado Libre Inmuebles, covering
 | Layer    | Technology                           |
 | -------- | ------------------------------------ |
 | Frontend | Vanilla JavaScript, SVG Canvas, CSS3 |
-| Backend  | Flask, Python                        |
+| Backend  | Browser inference; Flask local       |
 | ML       | Scikit-learn (Random Forest)         |
 | Data     | SQLite, Pandas                       |
-| Deploy   | Render                               |
+| Deploy   | Cloudflare Workers (static assets)   |
 
 ---
 
@@ -90,7 +92,7 @@ Data was collected using a custom scraper from Mercado Libre Inmuebles, covering
 
 ```bash
 # Clone
-git clone https://github.com/tachyon-lhc/oikos.git
+git clone https://github.com/hadron-lhc/oikos.git
 cd oikos
 
 # Install dependencies
@@ -99,10 +101,30 @@ source venv/bin/activate
 pip install -r src/requirements.txt
 
 # Train model
-python src/train_model_v2.py
+python src/train_model_V2.py
 
-# Run
+# Run Flask locally (optional)
 python src/app.py
+```
+
+### Static deployment
+
+The browser model is exported to `static/model/` and the static site is generated in `dist/`.
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip install -r scripts/requirements-export.txt
+
+python scripts/export_model.py
+python scripts/build_site.py
+python -m http.server 8000 -d dist
+```
+
+Open `http://localhost:8000`. The deploy build only needs Python's standard library:
+
+```bash
+python scripts/build_site.py
 ```
 
 ---
@@ -111,11 +133,12 @@ python src/app.py
 
 ```
 ├── src/
-│   ├── app.py                # Flask API
-│   ├── train_model_v2.py     # ML Training (v2 — 72k properties)
+│   ├── app.py                # Flask API (local)
+│   ├── train_model_V2.py     # ML Training (v2 — 72k properties)
 │   ├── analysis_db.py        # Data analysis
 │   └── models/               # Saved model + encoders
-├── static/                   # CSS/JS
+├── scripts/                  # Model export and static build
+├── static/                   # CSS/JS + browser model
 ├── templates/                # HTML
 ├── database/                 # SQLite DB (72k properties)
 └── data/                     # Exported CSVs
