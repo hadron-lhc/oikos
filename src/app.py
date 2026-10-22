@@ -146,10 +146,10 @@ def predict():
                     ambientes,
                     bathrooms,
                     area,
-                    zona_encoded,
-                    ciudad_encoded,
                     ambientes_por_m2,
                     baños_por_ambiente,
+                    zona_encoded,
+                    ciudad_encoded,
                 ]
             ]
         )

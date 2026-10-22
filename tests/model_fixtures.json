@@ -1,0 +1,110 @@
+{
+  "model_name": "oikos-rf-v1",
+  "n_trees": 50,
+  "feature_names": [
+    "ambientes",
+    "bathrooms",
+    "area",
+    "ambientes_por_m2",
+    "baños_por_ambiente",
+    "zona_encoded",
+    "ciudad_encoded"
+  ],
+  "cases": [
+    {
+      "input": {
+        "ambientes": 3,
+        "bathrooms": 2,
+        "area": 120,
+        "zona": "GBA Norte",
+        "ciudad": "pilar"
+      },
+      "features": [
+        3.0,
+        2.0,
+        120.0,
+        0.025,
+        0.6666666666666666,
+        3.0,
+        25.0
+      ],
+      "expected_price": 158854.12905240263
+    },
+    {
+      "input": {
+        "ambientes": 4,
+        "bathrooms": 3,
+        "area": 180,
+        "zona": "Córdoba",
+        "ciudad": "cordoba"
+      },
+      "features": [
+        4.0,
+        3.0,
+        180.0,
+        0.022222222222222223,
+        0.75,
+        2.0,
+        5.0
+      ],
+      "expected_price": 220562.60503772463
+    },
+    {
+      "input": {
+        "ambientes": 2,
+        "bathrooms": 1,
+        "area": 65,
+        "zona": "Costa Atlántica",
+        "ciudad": "mar-del-plata"
+      },
+      "features": [
+        2.0,
+        1.0,
+        65.0,
+        0.03076923076923077,
+        0.5,
+        1.0,
+        20.0
+      ],
+      "expected_price": 69073.24761541685
+    },
+    {
+      "input": {
+        "ambientes": 5,
+        "bathrooms": 4,
+        "area": 250,
+        "zona": "GBA Sur",
+        "ciudad": "la-plata"
+      },
+      "features": [
+        5.0,
+        4.0,
+        250.0,
+        0.02,
+        0.8,
+        5.0,
+        14.0
+      ],
+      "expected_price": 307339.6685786338
+    },
+    {
+      "input": {
+        "ambientes": 3,
+        "bathrooms": 2,
+        "area": 140,
+        "zona": "Buenos Aires Interior",
+        "ciudad": "lujan"
+      },
+      "features": [
+        3.0,
+        2.0,
+        140.0,
+        0.02142857142857143,
+        0.6666666666666666,
+        0.0,
+        17.0
+      ],
+      "expected_price": 144817.74540699692
+    }
+  ]
+}

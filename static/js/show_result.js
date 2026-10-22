@@ -306,11 +306,9 @@ function collectRoomData() {
 
   const ambientesValidos = [
     "bedroom",
-    "kitchen",
-    "hall",
-    "bathroom",
-    "guestroom",
+    "living_room",
     "dining-room",
+    "guestroom",
   ];
 
   allGroups.forEach((group) => {
@@ -373,35 +371,19 @@ function initExport() {
       return;
     }
 
-    console.log("Enviando datos a Flask:", data);
+    console.log("Calculando precio:", data);
 
     btnExport.textContent = "Calculando...";
     btnExport.disabled = true;
 
-    const API_URL =
-      window.location.hostname === "localhost"
-        ? "http://localhost:5000/predict"
-        : `${window.location.origin}/predict`;
-
-    console.log("Usando endpoint:", API_URL);
-
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error HTTP: ${response.status}`);
+      if (!window.OikosModel) {
+        throw new Error("Modelo no disponible");
       }
 
-      const result = await response.json();
-      console.log("Respuesta de Flask:", result);
+      const result = await window.OikosModel.predictPrice(data);
+      console.log("Precio estimado:", result);
 
-      // 🎉 Mostrar modal en lugar de alert
       const location =
         data.zona && data.ciudad ? `${data.zona} - ${data.ciudad}` : "";
       showPriceModal(result.formatted_price, {
@@ -411,16 +393,13 @@ function initExport() {
         location: location,
       });
     } catch (error) {
-      console.error("Error al conectar con Flask:", error);
+      console.error("Error al calcular el precio:", error);
       alert(
-        "❌ Error al calcular el precio.\nAsegúrate de que el servidor Flask esté corriendo si estás en local.",
+        "❌ Error al calcular el precio.\nNo se pudo cargar el modelo. Recargá la página e intentá de nuevo.",
       );
     } finally {
-      btnExport.textContent = "Calcular valor";
+      btnExport.textContent = "Calculate Value";
       btnExport.disabled = false;
     }
   });
 }
-
-// Inicializar cuando cargue el DOM
-document.addEventListener("DOMContentLoaded", initExport);
