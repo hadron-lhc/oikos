@@ -1,6 +1,6 @@
 const OikosModel = (() => {
-  const MODEL_URL = "/static/model/oikos-rf-v1.json";
-  const BINARY_URL = "/static/model/oikos-rf-v1.bin";
+  const MODEL_URL = "/static/model/oikos-rf-v2.json";
+  const BINARY_URL = "/static/model/oikos-rf-v2.bin";
   const SECTION_SIZES = {
     feature: 1,
     left: 4,
@@ -41,20 +41,28 @@ const OikosModel = (() => {
     return {
       metadata,
       view,
-      zonaIndex: new Map(metadata.zona_classes.map((value, index) => [value, index])),
-      ciudadIndex: new Map(
-        metadata.ciudad_classes.map((value, index) => [value, index]),
+      propertyTypeIndex: new Map(
+        metadata.property_type_classes.map((value, index) => [value, index]),
+      ),
+      locationIndex: new Map(
+        metadata.location_classes.map((value, index) => [value, index]),
       ),
     };
   }
 
   function buildFeatures(model, data) {
-    const ambientes = Number(data.ambientes);
+    const rooms = Number(data.rooms ?? data.ambientes);
+    const bedrooms = Number(data.bedrooms);
     const bathrooms = Number(data.bathrooms);
     const area = Number(data.area);
+    const propertyType = String(data.property_type ?? "");
+    const location = `${data.zona}|${data.ciudad}`;
 
-    if (!Number.isFinite(ambientes) || ambientes <= 0) {
+    if (!Number.isFinite(rooms) || rooms <= 0) {
       throw new Error("Ambientes inválidos");
+    }
+    if (!Number.isFinite(bedrooms) || bedrooms < 0) {
+      throw new Error("Dormitorios inválidos");
     }
     if (!Number.isFinite(bathrooms) || bathrooms < 0) {
       throw new Error("Baños inválidos");
@@ -63,20 +71,29 @@ const OikosModel = (() => {
       throw new Error("Área inválida");
     }
 
-    const zona = model.zonaIndex.get(data.zona);
-    const ciudad = model.ciudadIndex.get(data.ciudad);
-    if (zona === undefined || ciudad === undefined) {
+    const propertyTypeCode = model.propertyTypeIndex.get(propertyType);
+    const locationCode = model.locationIndex.get(location);
+    const centroid = model.metadata.city_centroids?.[location];
+    if (propertyTypeCode === undefined) {
+      throw new Error("Tipo de propiedad no reconocido");
+    }
+    if (locationCode === undefined || !centroid) {
       throw new Error("Zona o ciudad no reconocida");
     }
 
+    const [lat, lon] = centroid;
     const values = {
-      ambientes,
+      property_type_encoded: propertyTypeCode,
+      location_encoded: locationCode,
+      rooms,
+      bedrooms,
       bathrooms,
       area,
-      ambientes_por_m2: ambientes / area,
-      "baños_por_ambiente": bathrooms / ambientes,
-      zona_encoded: zona,
-      ciudad_encoded: ciudad,
+      lat,
+      lon,
+      rooms_per_m2: rooms / area,
+      bathrooms_per_room: bathrooms / rooms,
+      area_per_room: area / rooms,
     };
 
     return model.metadata.feature_names.map((name) => {

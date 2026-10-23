@@ -8,8 +8,8 @@ ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_PATH = ROOT / "templates" / "index.html"
 STATIC_PATH = ROOT / "static"
 DIST_PATH = ROOT / "dist"
-MODEL_JSON = STATIC_PATH / "model" / "oikos-rf-v1.json"
-MODEL_BIN = STATIC_PATH / "model" / "oikos-rf-v1.bin"
+MODEL_JSON = STATIC_PATH / "model" / "oikos-rf-v2.json"
+MODEL_BIN = STATIC_PATH / "model" / "oikos-rf-v2.bin"
 
 STATIC_URL_PATTERN = re.compile(
     r"\{\{\s*url_for\(\s*['\"]static['\"]\s*,\s*filename\s*=\s*['\"]([^'\"]+)['\"]\s*\)\s*\}\}"
@@ -47,7 +47,7 @@ def build() -> None:
         raise SystemExit(f"No existe {STATIC_PATH}")
     if not MODEL_JSON.exists() or not MODEL_BIN.exists():
         raise SystemExit(
-            "Falta el modelo exportado. Ejecutá: .venv/bin/python scripts/export_model.py"
+            "Falta el modelo exportado. Ejecutá: .venv/bin/python scripts/export_model_v2.py"
         )
 
     html = TEMPLATE_PATH.read_text(encoding="utf-8")

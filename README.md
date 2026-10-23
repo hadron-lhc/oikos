@@ -8,32 +8,25 @@ Design your house floor plan and get an instant price prediction using Machine L
 
 ---
 
-## 🔗 Links
+## 🔗 Link
 
-|                     |                                                                                                                |
-| ------------------- | -------------------------------------------------------------------------------------------------------------- |
-| 🌐 Web App          | [oikos.valentingonzalezdaumes.workers.dev](https://oikos.valentingonzalezdaumes.workers.dev/)                  |
-| 📊 Market Dashboard | [Looker Studio](https://lookerstudio.google.com/u/0/reporting/aac5fa4f-ba3a-443a-85f6-aade78be0318/page/78DsF) |
-| 🔍 Data Exploration | [Streamlit](https://oikos-data-exploration.streamlit.app/)                                                     |
-
-## 📁 Related Repositories
-
-|                     |                                                                                |
-| ------------------- | ------------------------------------------------------------------------------ |
-| 🕷️ Scraper          | [oikos-scraper](https://github.com/hadron-lhc/Scraper_ML-Inmuebles)                  |
-| 🔍 Data Exploration | [oikos-data-exploration](https://github.com/hadron-lhc/oikos-data-exploration) |
+|            |                                                                                               |
+| ---------- | --------------------------------------------------------------------------------------------- |
+| 🌐 Web App | [oikos.valentingonzalezdaumes.workers.dev](https://oikos.valentinggonzalezdaumes.workers.dev/) |
 
 ---
 
 ## What does it do?
 
-A web application that allows you to draw rooms interactively and predicts the housing price using a Random Forest model trained with over 72k real properties scraped from the Argentine real estate market.
+A web application that allows you to draw rooms interactively and predicts the housing price using a Random Forest model trained on historical Argentine real estate market data.
 
 ---
 
-## Where does it get the data from?
+## Data & limitations
 
-Data was collected using a custom scraper from Mercado Libre Inmuebles, covering 38 locations across Buenos Aires, Córdoba and the Atlantic Coast.
+Version 2 was trained on historical Argentine real estate market data ([Properati Listings Dataset](https://www.kaggle.com/datasets/jluza92/argentina-properati-listings-dataset-20202021), 2020–2021), licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/). Predictions are indicative estimates, not appraisals, and should not be used as the sole basis for a real estate decision.
+
+The model covers CABA and GBA (North, West and South) for houses, apartments and PH properties.
 
 ---
 
@@ -61,18 +54,19 @@ The production site runs inference directly in the browser, so the prediction do
 
 | Metric           | Value   |
 | ---------------- | ------- |
-| R² Score         | 0.72    |
-| MAE              | $59,046 |
-| RMSE             | $89,477 |
-| Training samples | ~68,000 |
+| R² Score         | 0.82    |
+| MAE              | $50,379 |
+| RMSE             | $104,982 |
+| Training rows    | 119,461 |
+| Test rows        | 16,981 |
 
 **Top features by importance:**
 
-- Area (63.7%)
-- City (12.2%)
-- Bathrooms (7.6%)
-- Rooms (5.5%)
-- Zone (4.6%)
+- Area (52.7%)
+- Location (9.9%)
+- Longitude (9.6%)
+- Latitude (9.2%)
+- Bathrooms (9.1%)
 
 ---
 
@@ -83,7 +77,7 @@ The production site runs inference directly in the browser, so the prediction do
 | Frontend | Vanilla JavaScript, SVG Canvas, CSS3 |
 | Backend  | Browser inference; Flask local       |
 | ML       | Scikit-learn (Random Forest)         |
-| Data     | SQLite, Pandas                       |
+| Data     | CSV, Pandas                          |
 | Deploy   | Cloudflare Workers (static assets)   |
 
 ---
@@ -100,8 +94,10 @@ python -m venv venv
 source venv/bin/activate
 pip install -r src/requirements.txt
 
-# Train model
-python src/train_model_V2.py
+# Download, prepare data and train model
+python scripts/data_v2/download_properati.py
+python scripts/data_v2/prepare_properati.py
+python src/train_model_v3.py
 
 # Run Flask locally (optional)
 python src/app.py
@@ -116,7 +112,7 @@ python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -r scripts/requirements-export.txt
 
-python scripts/export_model.py
+python scripts/export_model_v2.py
 python scripts/build_site.py
 python -m http.server 8000 -d dist
 ```
@@ -134,14 +130,13 @@ python scripts/build_site.py
 ```
 ├── src/
 │   ├── app.py                # Flask API (local)
-│   ├── train_model_V2.py     # ML Training (v2 — 72k properties)
+│   ├── train_model_v3.py     # ML Training (v2 — Properati 2020–2021)
 │   ├── analysis_db.py        # Data analysis
 │   └── models/               # Saved model + encoders
-├── scripts/                  # Model export and static build
+├── scripts/                  # Model export, static build and data pipeline
 ├── static/                   # CSS/JS + browser model
 ├── templates/                # HTML
-├── database/                 # SQLite DB (72k properties)
-└── data/                     # Exported CSVs
+└── data/                     # Local datasets and model artifacts (ignored)
 ```
 
 ---

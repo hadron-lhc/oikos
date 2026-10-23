@@ -78,6 +78,14 @@
         <div class="form-section">
           <h3>Additional Information</h3>
 
+          <label>Property type:</label>
+          <select id="property-type-select">
+            <option value="">Select type...</option>
+            <option value="Casa">House</option>
+            <option value="Departamento">Apartment</option>
+            <option value="PH">PH</option>
+          </select>
+
           <label>Area:</label>
           <input
             type="number"
@@ -88,12 +96,10 @@
           <label>Region:</label>
           <select id="region-select">
             <option value="">Select region...</option>
+            <option value="CABA">CABA</option>
             <option value="GBA Norte">GBA Norte</option>
             <option value="GBA Oeste">GBA Oeste</option>
             <option value="GBA Sur">GBA Sur</option>
-            <option value="Córdoba">Córdoba</option>
-            <option value="Costa Atlántica">Costa Atlántica</option>
-            <option value="Buenos Aires Interior">Buenos Aires Interior</option>
           </select>
 
           <label style="margin-top: 15px">City:</label>
@@ -110,6 +116,9 @@
           >
             Calculate Value
           </button>
+          <p class="estimate-disclaimer">
+            Indicative estimate based on historical market data. Not an appraisal.
+          </p>
         </div>
       </div>
     </div>
@@ -122,6 +131,7 @@
       <div class="menu-item" data-tipo="guestroom">Guestroom</div>
     </div>
     <script src="{{ url_for('static', filename='js/state.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/locations_v2.js') }}"></script>
     <script src="{{ url_for('static', filename='js/tools.js') }}"></script>
     <script src="{{ url_for('static', filename='js/canvas.js') }}"></script>
     <script src="{{ url_for('static', filename='js/contextMenu.js') }}"></script>

@@ -340,6 +340,14 @@ body {
   cursor: not-allowed;
   box-shadow: none;
 }
+
+.estimate-disclaimer {
+  margin: 10px 0 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #94a3b8;
+  text-align: center;
+}
 button:hover {
   cursor: pointer;
 }

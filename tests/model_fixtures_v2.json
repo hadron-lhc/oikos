@@ -1,0 +1,144 @@
+{
+  "model_name": "oikos-rf-v2",
+  "n_trees": 50,
+  "feature_names": [
+    "property_type_encoded",
+    "location_encoded",
+    "rooms",
+    "bedrooms",
+    "bathrooms",
+    "area",
+    "lat",
+    "lon",
+    "rooms_per_m2",
+    "bathrooms_per_room",
+    "area_per_room"
+  ],
+  "cases": [
+    {
+      "input": {
+        "property_type": "Departamento",
+        "zona": "CABA",
+        "ciudad": "palermo",
+        "rooms": 3,
+        "bedrooms": 2,
+        "bathrooms": 2,
+        "area": 75
+      },
+      "features": [
+        1.0,
+        26.0,
+        3.0,
+        2.0,
+        2.0,
+        75.0,
+        -34.58191,
+        -58.424139,
+        0.04,
+        0.6666666666666666,
+        25.0
+      ],
+      "expected_price": 347485.7553502894
+    },
+    {
+      "input": {
+        "property_type": "Casa",
+        "zona": "GBA Norte",
+        "ciudad": "tigre",
+        "rooms": 5,
+        "bedrooms": 4,
+        "bathrooms": 3,
+        "area": 180
+      },
+      "features": [
+        0.0,
+        65.0,
+        5.0,
+        4.0,
+        3.0,
+        180.0,
+        -34.409939,
+        -58.648999,
+        0.027777777777777776,
+        0.6,
+        36.0
+      ],
+      "expected_price": 360004.58578404307
+    },
+    {
+      "input": {
+        "property_type": "PH",
+        "zona": "GBA Sur",
+        "ciudad": "la-plata",
+        "rooms": 4,
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "area": 120
+      },
+      "features": [
+        2.0,
+        83.0,
+        4.0,
+        3.0,
+        2.0,
+        120.0,
+        -34.917411,
+        -57.963338,
+        0.03333333333333333,
+        0.5,
+        30.0
+      ],
+      "expected_price": 142728.9669664441
+    },
+    {
+      "input": {
+        "property_type": "Departamento",
+        "zona": "GBA Oeste",
+        "ciudad": "moron",
+        "rooms": 2,
+        "bedrooms": 1,
+        "bathrooms": 1,
+        "area": 55
+      },
+      "features": [
+        1.0,
+        74.0,
+        2.0,
+        1.0,
+        1.0,
+        55.0,
+        -34.649039,
+        -58.619069,
+        0.03636363636363636,
+        0.5,
+        27.5
+      ],
+      "expected_price": 104201.26273008276
+    },
+    {
+      "input": {
+        "property_type": "Casa",
+        "zona": "CABA",
+        "ciudad": "belgrano",
+        "rooms": 6,
+        "bedrooms": 4,
+        "bathrooms": 4,
+        "area": 250
+      },
+      "features": [
+        0.0,
+        6.0,
+        6.0,
+        4.0,
+        4.0,
+        250.0,
+        -34.56246,
+        -58.454387,
+        0.024,
+        0.6666666666666666,
+        41.666666666666664
+      ],
+      "expected_price": 751096.2001201616
+    }
+  ]
+}

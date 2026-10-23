@@ -8,11 +8,11 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const OikosModel = require(resolve(root, "static/js/inference.js"));
 
 const metadata = JSON.parse(
-  readFileSync(resolve(root, "static/model/oikos-rf-v1.json"), "utf8"),
+  readFileSync(resolve(root, "static/model/oikos-rf-v2.json"), "utf8"),
 );
-const binary = readFileSync(resolve(root, "static/model/oikos-rf-v1.bin"));
+const binary = readFileSync(resolve(root, "static/model/oikos-rf-v2.bin"));
 const fixtures = JSON.parse(
-  readFileSync(resolve(root, "tests/model_fixtures.json"), "utf8"),
+  readFileSync(resolve(root, "tests/model_fixtures_v2.json"), "utf8"),
 );
 
 const model = OikosModel.createModel(metadata, new Uint8Array(binary));

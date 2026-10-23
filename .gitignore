@@ -22,3 +22,9 @@ Thumbs.db
 # Deploy
 dist/
 data/
+
+# Local data and trained artifacts
+database/
+*.db
+*.pkl
+src/convertir_csv.py

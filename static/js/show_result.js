@@ -33,7 +33,11 @@ function createPriceModal() {
           <div class="modal-details" id="modal-details">
             <!-- Detalles opcionales -->
           </div>
-          
+
+          <p class="modal-disclaimer">
+            Indicative estimate based on historical market data. Not an appraisal.
+          </p>
+
           <div class="modal-actions">
             <button class="btn-secondary" onclick="closePriceModal()">Close</button>
             <button class="btn-primary" onclick="resetCanvas()">New house</button>
@@ -165,6 +169,13 @@ function createPriceModal() {
       .modal-details strong {
         color: #333;
       }
+
+      .modal-disclaimer {
+        margin: 0 0 20px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: #94a3b8;
+      }
       
       .modal-actions {
         display: flex;
@@ -240,9 +251,13 @@ function showPriceModal(price, details = {}) {
   // Mostrar detalles opcionales
   if (Object.keys(details).length > 0) {
     let detailsHTML = "";
-    if (details.ambientes)
-      detailsHTML += `<p><span>Rooms:</span> <strong>${details.ambientes}</strong></p>`;
-    if (details.bathrooms)
+    if (details.property_type)
+      detailsHTML += `<p><span>Type:</span> <strong>${details.property_type}</strong></p>`;
+    if (details.rooms !== undefined)
+      detailsHTML += `<p><span>Rooms:</span> <strong>${details.rooms}</strong></p>`;
+    if (details.bedrooms !== undefined)
+      detailsHTML += `<p><span>Bedrooms:</span> <strong>${details.bedrooms}</strong></p>`;
+    if (details.bathrooms !== undefined)
       detailsHTML += `<p><span>Bathrooms:</span> <strong>${details.bathrooms}</strong></p>`;
     if (details.area)
       detailsHTML += `<p><span>Area:</span> <strong>${details.area} m²</strong></p>`;
@@ -287,6 +302,7 @@ function resetCanvas() {
 
     // Resetear formulario
     document.getElementById("area-metros").value = "";
+    document.getElementById("property-type-select").value = "";
     document.getElementById("region-select").value = "";
     document.getElementById("localidad-select").value = "";
 
@@ -301,15 +317,17 @@ function collectRoomData() {
   const allGroups = document.querySelectorAll("#canvas .rectangle-group");
   console.log("Total de grupos encontrados:", allGroups.length);
 
-  let ambientes = 0;
+  let rooms = 0;
+  let bedrooms = 0;
   let bathrooms = 0;
 
-  const ambientesValidos = [
+  const roomTypes = [
     "bedroom",
     "living_room",
     "dining-room",
     "guestroom",
   ];
+  const bedroomTypes = ["bedroom", "guestroom"];
 
   allGroups.forEach((group) => {
     const rect = group.querySelector(".rectangle");
@@ -321,8 +339,12 @@ function collectRoomData() {
 
     if (ancho < 5 || alto < 5) return;
 
-    if (ambientesValidos.includes(tipo)) {
-      ambientes++;
+    if (roomTypes.includes(tipo)) {
+      rooms++;
+    }
+
+    if (bedroomTypes.includes(tipo)) {
+      bedrooms++;
     }
 
     if (tipo === "bathroom") {
@@ -331,20 +353,27 @@ function collectRoomData() {
   });
 
   const area = parseInt(document.getElementById("area-metros").value) || 0;
+  const propertyType =
+    document.getElementById("property-type-select").value || "";
   const zona = document.getElementById("region-select").value || "";
-  const ciudad = document.getElementById("localidad-select").value || "";
+  const ciudadSelect = document.getElementById("localidad-select");
+  const ciudad = ciudadSelect.value || "";
+  const ciudadLabel =
+    ciudadSelect.selectedOptions[0]?.textContent?.trim() || ciudad;
 
-  console.log(
-    `Ambientes contados: ${ambientes} (${ambientesValidos.join(", ")})`,
-  );
-  console.log(`Baños contados: ${bathrooms}`);
+  console.log(`Rooms counted: ${rooms} (${roomTypes.join(", ")})`);
+  console.log(`Bedrooms counted: ${bedrooms} (${bedroomTypes.join(", ")})`);
+  console.log(`Bathrooms counted: ${bathrooms}`);
 
   return {
-    ambientes,
+    property_type: propertyType,
+    rooms,
+    bedrooms,
     bathrooms,
     area,
     zona,
     ciudad,
+    ciudad_label: ciudadLabel,
   };
 }
 
@@ -362,11 +391,15 @@ function initExport() {
       alert("⚠️ Por favor ingresa el área en metros cuadrados");
       return;
     }
+    if (!data.property_type) {
+      alert("⚠️ Por favor selecciona el tipo de propiedad");
+      return;
+    }
     if (!data.zona || !data.ciudad) {
       alert("⚠️ Por favor selecciona la región y localidad");
       return;
     }
-    if (data.ambientes === 0) {
+    if (data.rooms === 0) {
       alert("⚠️ Por favor dibuja al menos un ambiente en el plano");
       return;
     }
@@ -385,9 +418,13 @@ function initExport() {
       console.log("Precio estimado:", result);
 
       const location =
-        data.zona && data.ciudad ? `${data.zona} - ${data.ciudad}` : "";
+        data.zona && data.ciudad
+          ? `${data.zona} - ${data.ciudad_label || data.ciudad}`
+          : "";
       showPriceModal(result.formatted_price, {
-        ambientes: data.ambientes,
+        property_type: data.property_type,
+        rooms: data.rooms,
+        bedrooms: data.bedrooms,
         bathrooms: data.bathrooms,
         area: data.area,
         location: location,

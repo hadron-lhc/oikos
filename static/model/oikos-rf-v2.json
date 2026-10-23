@@ -1,0 +1,671 @@
+{
+  "format_version": 1,
+  "model_name": "oikos-rf-v2",
+  "created_at": "2026-10-22T21:18:14.715120+00:00",
+  "source_model": "src/models/modelo_general_v2.pkl",
+  "source_sha256": "d98e359a38db959aa31e485f7f51f42d7be29810c60969fc31c60dc6d047bd3e",
+  "source_license": "CC BY-SA 3.0",
+  "source_url": "https://www.kaggle.com/datasets/jluza92/argentina-properati-listings-dataset-20202021",
+  "sklearn_version": "1.7.1",
+  "numpy_version": "2.5.4",
+  "model_type": "RandomForestRegressor",
+  "target": "precio",
+  "currency": "USD",
+  "n_features": 11,
+  "feature_names": [
+    "property_type_encoded",
+    "location_encoded",
+    "rooms",
+    "bedrooms",
+    "bathrooms",
+    "area",
+    "lat",
+    "lon",
+    "rooms_per_m2",
+    "bathrooms_per_room",
+    "area_per_room"
+  ],
+  "property_type_classes": [
+    "Casa",
+    "Departamento",
+    "PH"
+  ],
+  "location_classes": [
+    "CABA|abasto",
+    "CABA|agronomia",
+    "CABA|almagro",
+    "CABA|balvanera",
+    "CABA|barracas",
+    "CABA|barrio-norte",
+    "CABA|belgrano",
+    "CABA|boca",
+    "CABA|boedo",
+    "CABA|caballito",
+    "CABA|catalinas",
+    "CABA|centro-microcentro",
+    "CABA|chacarita",
+    "CABA|coghlan",
+    "CABA|colegiales",
+    "CABA|congreso",
+    "CABA|constitucion",
+    "CABA|flores",
+    "CABA|floresta",
+    "CABA|las-canitas",
+    "CABA|liniers",
+    "CABA|mataderos",
+    "CABA|monserrat",
+    "CABA|monte-castro",
+    "CABA|nunez",
+    "CABA|once",
+    "CABA|palermo",
+    "CABA|parque-avellaneda",
+    "CABA|parque-centenario",
+    "CABA|parque-chacabuco",
+    "CABA|parque-chas",
+    "CABA|parque-patricios",
+    "CABA|paternal",
+    "CABA|pompeya",
+    "CABA|puerto-madero",
+    "CABA|recoleta",
+    "CABA|retiro",
+    "CABA|saavedra",
+    "CABA|san-cristobal",
+    "CABA|san-nicolas",
+    "CABA|san-telmo",
+    "CABA|tribunales",
+    "CABA|velez-sarsfield",
+    "CABA|versalles",
+    "CABA|villa-crespo",
+    "CABA|villa-del-parque",
+    "CABA|villa-devoto",
+    "CABA|villa-general-mitre",
+    "CABA|villa-lugano",
+    "CABA|villa-luro",
+    "CABA|villa-ortuzar",
+    "CABA|villa-pueyrredon",
+    "CABA|villa-real",
+    "CABA|villa-riachuelo",
+    "CABA|villa-santa-rita",
+    "CABA|villa-soldati",
+    "CABA|villa-urquiza",
+    "GBA Norte|escobar",
+    "GBA Norte|general-san-martin",
+    "GBA Norte|jose-c-paz",
+    "GBA Norte|malvinas-argentinas",
+    "GBA Norte|pilar",
+    "GBA Norte|san-fernando",
+    "GBA Norte|san-isidro",
+    "GBA Norte|san-miguel",
+    "GBA Norte|tigre",
+    "GBA Norte|vicente-lopez",
+    "GBA Oeste|general-rodriguez",
+    "GBA Oeste|hurlingham",
+    "GBA Oeste|ituzaingo",
+    "GBA Oeste|la-matanza",
+    "GBA Oeste|marcos-paz",
+    "GBA Oeste|merlo",
+    "GBA Oeste|moreno",
+    "GBA Oeste|moron",
+    "GBA Oeste|tres-de-febrero",
+    "GBA Sur|almirante-brown",
+    "GBA Sur|avellaneda",
+    "GBA Sur|berazategui",
+    "GBA Sur|canuelas",
+    "GBA Sur|esteban-echeverria",
+    "GBA Sur|ezeiza",
+    "GBA Sur|florencio-varela",
+    "GBA Sur|la-plata",
+    "GBA Sur|lanus",
+    "GBA Sur|lomas-de-zamora",
+    "GBA Sur|presidente-peron",
+    "GBA Sur|quilmes",
+    "GBA Sur|san-vicente"
+  ],
+  "city_centroids": {
+    "CABA|abasto": [
+      -34.603338,
+      -58.411259
+    ],
+    "CABA|agronomia": [
+      -34.59319,
+      -58.489932
+    ],
+    "CABA|almagro": [
+      -34.605414,
+      -58.422085
+    ],
+    "CABA|balvanera": [
+      -34.609991,
+      -58.402583
+    ],
+    "CABA|barracas": [
+      -34.636581,
+      -58.374045
+    ],
+    "CABA|barrio-norte": [
+      -34.593326,
+      -58.403223
+    ],
+    "CABA|belgrano": [
+      -34.56246,
+      -58.454387
+    ],
+    "CABA|boca": [
+      -34.632952,
+      -58.363134
+    ],
+    "CABA|boedo": [
+      -34.626879,
+      -58.417874
+    ],
+    "CABA|caballito": [
+      -34.619025,
+      -58.44245
+    ],
+    "CABA|catalinas": [
+      -34.599898,
+      -58.371295
+    ],
+    "CABA|centro-microcentro": [
+      -34.601797,
+      -58.378264
+    ],
+    "CABA|chacarita": [
+      -34.586715,
+      -58.450489
+    ],
+    "CABA|coghlan": [
+      -34.561292,
+      -58.474834
+    ],
+    "CABA|colegiales": [
+      -34.576634,
+      -58.450791
+    ],
+    "CABA|congreso": [
+      -34.609286,
+      -58.392835
+    ],
+    "CABA|constitucion": [
+      -34.625301,
+      -58.385598
+    ],
+    "CABA|flores": [
+      -34.629046,
+      -58.463361
+    ],
+    "CABA|floresta": [
+      -34.628247,
+      -58.486442
+    ],
+    "CABA|las-canitas": [
+      -34.569034,
+      -58.433146
+    ],
+    "CABA|liniers": [
+      -34.643839,
+      -58.520124
+    ],
+    "CABA|mataderos": [
+      -34.65576,
+      -58.503795
+    ],
+    "CABA|monserrat": [
+      -34.61456,
+      -58.384181
+    ],
+    "CABA|monte-castro": [
+      -34.621327,
+      -58.504813
+    ],
+    "CABA|nunez": [
+      -34.548662,
+      -58.465622
+    ],
+    "CABA|once": [
+      -34.606083,
+      -58.405117
+    ],
+    "CABA|palermo": [
+      -34.58191,
+      -58.424139
+    ],
+    "CABA|parque-avellaneda": [
+      -34.64486,
+      -58.477986
+    ],
+    "CABA|parque-centenario": [
+      -34.606402,
+      -58.43521
+    ],
+    "CABA|parque-chacabuco": [
+      -34.635844,
+      -58.438808
+    ],
+    "CABA|parque-chas": [
+      -34.58532,
+      -58.477474
+    ],
+    "CABA|parque-patricios": [
+      -34.63323,
+      -58.40315
+    ],
+    "CABA|paternal": [
+      -34.602332,
+      -58.465988
+    ],
+    "CABA|pompeya": [
+      -34.643108,
+      -58.414028
+    ],
+    "CABA|puerto-madero": [
+      -34.612784,
+      -58.361779
+    ],
+    "CABA|recoleta": [
+      -34.591984,
+      -58.395094
+    ],
+    "CABA|retiro": [
+      -34.596096,
+      -58.378434
+    ],
+    "CABA|saavedra": [
+      -34.551685,
+      -58.48281
+    ],
+    "CABA|san-cristobal": [
+      -34.622952,
+      -58.400294
+    ],
+    "CABA|san-nicolas": [
+      -34.603077,
+      -58.381163
+    ],
+    "CABA|san-telmo": [
+      -34.621147,
+      -58.374438
+    ],
+    "CABA|tribunales": [
+      -34.602646,
+      -58.386359
+    ],
+    "CABA|velez-sarsfield": [
+      -34.630798,
+      -58.493546
+    ],
+    "CABA|versalles": [
+      -34.629704,
+      -58.520333
+    ],
+    "CABA|villa-crespo": [
+      -34.598103,
+      -58.441151
+    ],
+    "CABA|villa-del-parque": [
+      -34.605605,
+      -58.489353
+    ],
+    "CABA|villa-devoto": [
+      -34.603405,
+      -58.51194
+    ],
+    "CABA|villa-general-mitre": [
+      -34.610504,
+      -58.46927
+    ],
+    "CABA|villa-lugano": [
+      -34.679086,
+      -58.474691
+    ],
+    "CABA|villa-luro": [
+      -34.63854,
+      -58.502673
+    ],
+    "CABA|villa-ortuzar": [
+      -34.582197,
+      -58.469604
+    ],
+    "CABA|villa-pueyrredon": [
+      -34.584749,
+      -58.50148
+    ],
+    "CABA|villa-real": [
+      -34.619773,
+      -58.525744
+    ],
+    "CABA|villa-riachuelo": [
+      -34.691342,
+      -58.470815
+    ],
+    "CABA|villa-santa-rita": [
+      -34.615337,
+      -58.481267
+    ],
+    "CABA|villa-soldati": [
+      -34.664189,
+      -58.443099
+    ],
+    "CABA|villa-urquiza": [
+      -34.573748,
+      -58.485661
+    ],
+    "GBA Norte|escobar": [
+      -34.355288,
+      -58.753286
+    ],
+    "GBA Norte|general-san-martin": [
+      -34.558019,
+      -58.549228
+    ],
+    "GBA Norte|jose-c-paz": [
+      -34.514454,
+      -58.756619
+    ],
+    "GBA Norte|malvinas-argentinas": [
+      -34.484742,
+      -58.708282
+    ],
+    "GBA Norte|pilar": [
+      -34.442476,
+      -58.863544
+    ],
+    "GBA Norte|san-fernando": [
+      -34.4471,
+      -58.556037
+    ],
+    "GBA Norte|san-isidro": [
+      -34.481707,
+      -58.523057
+    ],
+    "GBA Norte|san-miguel": [
+      -34.548359,
+      -58.705464
+    ],
+    "GBA Norte|tigre": [
+      -34.409939,
+      -58.648999
+    ],
+    "GBA Norte|vicente-lopez": [
+      -34.521055,
+      -58.489935
+    ],
+    "GBA Oeste|general-rodriguez": [
+      -34.606756,
+      -58.945358
+    ],
+    "GBA Oeste|hurlingham": [
+      -34.600932,
+      -58.639784
+    ],
+    "GBA Oeste|ituzaingo": [
+      -34.647299,
+      -58.676725
+    ],
+    "GBA Oeste|la-matanza": [
+      -34.663363,
+      -58.561928
+    ],
+    "GBA Oeste|marcos-paz": [
+      -34.789181,
+      -58.845968
+    ],
+    "GBA Oeste|merlo": [
+      -34.671209,
+      -58.712969
+    ],
+    "GBA Oeste|moreno": [
+      -34.632086,
+      -58.810673
+    ],
+    "GBA Oeste|moron": [
+      -34.649039,
+      -58.619069
+    ],
+    "GBA Oeste|tres-de-febrero": [
+      -34.600888,
+      -58.56031
+    ],
+    "GBA Sur|almirante-brown": [
+      -34.805005,
+      -58.387817
+    ],
+    "GBA Sur|avellaneda": [
+      -34.683972,
+      -58.345791
+    ],
+    "GBA Sur|berazategui": [
+      -34.798202,
+      -58.181743
+    ],
+    "GBA Sur|canuelas": [
+      -35.048533,
+      -58.75576
+    ],
+    "GBA Sur|esteban-echeverria": [
+      -34.868181,
+      -58.483852
+    ],
+    "GBA Sur|ezeiza": [
+      -34.878837,
+      -58.512691
+    ],
+    "GBA Sur|florencio-varela": [
+      -34.807945,
+      -58.273595
+    ],
+    "GBA Sur|la-plata": [
+      -34.917411,
+      -57.963338
+    ],
+    "GBA Sur|lanus": [
+      -34.706722,
+      -58.395059
+    ],
+    "GBA Sur|lomas-de-zamora": [
+      -34.759638,
+      -58.399864
+    ],
+    "GBA Sur|presidente-peron": [
+      -34.913123,
+      -58.380198
+    ],
+    "GBA Sur|quilmes": [
+      -34.721988,
+      -58.267158
+    ],
+    "GBA Sur|san-vicente": [
+      -34.976637,
+      -58.468106
+    ]
+  },
+  "n_trees_total": 50,
+  "n_trees": 50,
+  "tree_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+  ],
+  "tree_node_counts": [
+    14089,
+    14001,
+    14339,
+    14209,
+    13915,
+    13733,
+    14137,
+    14043,
+    13763,
+    13459,
+    13171,
+    13925,
+    13977,
+    14133,
+    14155,
+    14177,
+    14459,
+    14213,
+    13709,
+    14327,
+    13997,
+    14111,
+    14187,
+    13939,
+    14157,
+    14257,
+    13951,
+    13641,
+    13647,
+    13725,
+    13669,
+    13827,
+    14459,
+    13553,
+    13965,
+    13743,
+    13963,
+    14071,
+    13887,
+    13881,
+    13859,
+    14005,
+    14177,
+    14429,
+    14193,
+    13821,
+    13975,
+    14535,
+    13965,
+    13103
+  ],
+  "n_nodes": 698626,
+  "tree_node_offsets": [
+    0,
+    14089,
+    28090,
+    42429,
+    56638,
+    70553,
+    84286,
+    98423,
+    112466,
+    126229,
+    139688,
+    152859,
+    166784,
+    180761,
+    194894,
+    209049,
+    223226,
+    237685,
+    251898,
+    265607,
+    279934,
+    293931,
+    308042,
+    322229,
+    336168,
+    350325,
+    364582,
+    378533,
+    392174,
+    405821,
+    419546,
+    433215,
+    447042,
+    461501,
+    475054,
+    489019,
+    502762,
+    516725,
+    530796,
+    544683,
+    558564,
+    572423,
+    586428,
+    600605,
+    615034,
+    629227,
+    643048,
+    657023,
+    671558,
+    685523,
+    698626
+  ],
+  "sections": {
+    "feature": {
+      "offset": 0,
+      "length": 698626,
+      "dtype": "uint8"
+    },
+    "left": {
+      "offset": 698626,
+      "length": 698626,
+      "dtype": "int32"
+    },
+    "right": {
+      "offset": 3493130,
+      "length": 698626,
+      "dtype": "int32"
+    },
+    "threshold": {
+      "offset": 6287634,
+      "length": 698626,
+      "dtype": "float64"
+    },
+    "value": {
+      "offset": 11876642,
+      "length": 698626,
+      "dtype": "float64"
+    }
+  },
+  "binary_bytes": 17465650,
+  "binary_sha256": "eef2a90ebdd7d6db83d55804cb3fdf7481e86bcedb6d3f6a7f881bf5d1205f7e"
+}
