@@ -8,11 +8,12 @@ Design your house floor plan and get an instant price prediction using Machine L
 
 ---
 
-## 🔗 Link
+## 🔗 Links
 
-|            |                                                                                               |
-| ---------- | --------------------------------------------------------------------------------------------- |
-| 🌐 Web App | [oikos.valentingonzalezdaumes.workers.dev](https://oikos.valentingonzalezdaumes.workers.dev/) |
+|                     |                                                                                                                |
+| ------------------- | -------------------------------------------------------------------------------------------------------------- |
+| 🌐 Web App          | [oikos.valentingonzalezdaumes.workers.dev](https://oikos.valentingonzalezdaumes.workers.dev/)                  |
+| 📊 Market Dashboard | [Looker Studio](https://lookerstudio.google.com/u/0/reporting/aac5fa4f-ba3a-443a-85f6-aade78be0318/page/78DsF) |
 
 ---
 
