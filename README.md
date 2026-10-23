@@ -12,7 +12,7 @@ Design your house floor plan and get an instant price prediction using Machine L
 
 |            |                                                                                               |
 | ---------- | --------------------------------------------------------------------------------------------- |
-| 🌐 Web App | [oikos.valentingonzalezdaumes.workers.dev](https://oikos.valentinggonzalezdaumes.workers.dev/) |
+| 🌐 Web App | [oikos.valentingonzalezdaumes.workers.dev](https://oikos.valentingonzalezdaumes.workers.dev/) |
 
 ---
 
@@ -52,13 +52,13 @@ The production site runs inference directly in the browser, so the prediction do
 
 ## 🤖 Model Performance
 
-| Metric           | Value   |
-| ---------------- | ------- |
-| R² Score         | 0.82    |
-| MAE              | $50,379 |
-| RMSE             | $104,982 |
-| Training rows    | 119,461 |
-| Test rows        | 16,981 |
+| Metric        | Value    |
+| ------------- | -------- |
+| R² Score      | 0.82     |
+| MAE           | $50,379  |
+| RMSE          | $104,982 |
+| Training rows | 119,461  |
+| Test rows     | 16,981   |
 
 **Top features by importance:**
 
